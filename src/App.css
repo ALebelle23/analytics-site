@@ -7,9 +7,26 @@
 .main-content {
   flex: 1;
   padding: 2rem;
+  padding-top: 6rem; 
   max-width: 1280px;
   margin: 0 auto;
   width: 100%;
+  box-sizing: border-box;
+}
+
+
+@media (max-width: 480px) {
+  .main-content {
+    padding-top: 8rem; /* More space for mobile nav that might wrap to 2 lines */
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 481px) {
+  .main-content {
+    padding-top: 7rem; 
+  }
 }
 
 .logo {

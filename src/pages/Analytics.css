@@ -1,0 +1,105 @@
+.analytics {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: rgba(3, 71, 50, 0.5); /* British Racing Green, semi-transparent */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px); /* For Safari */
+  border-radius: 18px;
+  box-shadow: 0 8px 32px 0 rgba(34, 34, 34, 0.37);
+}
+
+.analytics h1 {
+  color: #efe9f4;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+}
+
+.analytics p {
+  text-align: center;
+  color: #efe9f4;
+  margin-bottom: 3rem;
+  font-size: 1.2rem;
+}
+
+.charts-container {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+.chart-section {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(3, 71, 50, 0.1);
+  border: 2px solid #7eb77f;
+  flex: 1;
+  min-height: 500px;
+}
+
+.chart-section h2 {
+  color: #034732;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+}
+
+.loading {
+  background-color: #efe9f4;
+  color: #034732;
+  border: 2px solid #7eb77f;
+}
+
+.error {
+  background-color: #ffeaea;
+  color: #a8201a;
+  border: 2px solid #a8201a;
+}
+
+@media (max-width: 768px) {
+  .analytics {
+    padding: 1rem;
+  }
+  
+  .charts-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .chart-section {
+    padding: 1rem;
+    min-height: 400px;
+  }
+  
+  .analytics h1 {
+    font-size: 2rem;
+  }
+}
+.data-source {
+  text-align: center;
+    color: #efe9f4;
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+.data-source a {
+ color: #ec9a29;
+  text-decoration: bold;
+  transition: color 0.2s;
+}
+.data-source a:hover {
+  color: #a8201a;
+}

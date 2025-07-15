@@ -1,22 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import ufoIcon from '/UFO.png'
 import './Navigation.css'
+import { translations } from '../translation.js'
 
-const Navigation = () => {
+const Navigation = ({ language, setLanguage }) => {
+     const t = translations[language];
   return (
     <nav className="navigation">
       <div className="nav-brand">
-        <Link to="/">UFOlytics</Link>
+        <Link to="/">
+          <img src={ufoIcon} alt="UFO" className="nav-logo" />
+          UFOlytics
+        </Link>
       </div>
       <ul className="nav-links">
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/analytics">{t.analytics}</Link>
         </li>
         <li>
-          <Link to="/about">About</Link>
-        </li>
-        <li>
-          <Link to="/analytics">Analytics</Link>
+          <select
+            value={language}
+            onChange={e => setLanguage(e.target.value)}
+          >
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+          </select>
         </li>
       </ul>
     </nav>
