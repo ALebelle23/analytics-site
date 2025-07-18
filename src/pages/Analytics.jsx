@@ -3,6 +3,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import { loadCSVData, processDataForCharts } from '../services/dataService';
 import './Analytics.css';
 import { translations } from '../translation.js';
+
 const countryNames = {
   us: 'United States',
   gb: 'United Kingdom',
@@ -24,8 +25,8 @@ const Analytics = ({language}) => {
   const [data, setData] = useState({ yearData: [], locationData: [] });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [yearRange, setYearRange] = useState([1990, 2020]); // [startYear, endYear]
-  const [selectedCountry, setSelectedCountry] = useState(null); // country code
+  const [yearRange, setYearRange] = useState([1990, 2020]); 
+  const [selectedCountry, setSelectedCountry] = useState(null); 
   const t = translations[language];
 
   useEffect(() => {
@@ -47,6 +48,9 @@ const Analytics = ({language}) => {
   // Get min/max year from data
   const minYear = data.yearData.length > 0 ? Math.min(...data.yearData.map(d => d.year)) : 1990;
   const maxYear = data.yearData.length > 0 ? Math.max(...data.yearData.map(d => d.year)) : 2020;
+
+  // Only years with sightings
+  const yearsWithSightings = data.yearData.map(d => d.year);
 
   // Filter yearData for Graph 1
   const filteredYearData = data.yearData.filter(d => d.year >= yearRange[0] && d.year <= yearRange[1]);
@@ -82,9 +86,9 @@ const Analytics = ({language}) => {
       <p>{t.dashboard_desc}</p>
       <div className="charts-container">
         {/* Graph 1: UFO Sightings Over Time */}
-        <div className="chart-section">
+        <div className="chart-section" style={{ paddingTop: '0.5rem' }}>
           <h2>{t.graph1_title}</h2>
-          <div style={{ marginBottom: '1rem', textAlign: 'center', color: '#034732' }}>
+          <div style={{ margin: '1rem 0', textAlign: 'center', color: '#034732' }}>
             <label htmlFor="startYear">{t.year} {t.start}:</label>
             <select
               id="startYear"
@@ -96,8 +100,8 @@ const Analytics = ({language}) => {
               style={{ margin: '0 1rem' }}
               aria-label={`${t.year} ${t.start}`}
             >
-              {Array.from({ length: maxYear - minYear + 1 }, (_, i) => minYear + i).map(y => (
-                <option key={y} value={y}>{y}</option>
+              {data.yearData.map(d => (
+                <option key={d.year} value={d.year}>{d.year}</option>
               ))}
             </select>
             <label htmlFor="endYear">{t.year} {t.end}:</label>
@@ -111,8 +115,8 @@ const Analytics = ({language}) => {
               style={{ margin: '0 1rem' }}
               aria-label={`${t.year} ${t.end}`}
             >
-              {Array.from({ length: maxYear - minYear + 1 }, (_, i) => minYear + i).map(y => (
-                <option key={y} value={y}>{y}</option>
+              {data.yearData.map(d => (
+                <option key={d.year} value={d.year}>{d.year}</option>
               ))}
             </select>
           </div>
@@ -132,7 +136,7 @@ const Analytics = ({language}) => {
           ) : (
             <>
               <ResponsiveContainer width="100%" height={400}>
-                <LineChart data={filteredYearData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                <LineChart data={filteredYearData} margin={{ top: 20, right: 30, left: 20, bottom: 8 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#7eb77f" opacity={0.3} />
                   <XAxis 
                     dataKey="year" 
@@ -218,7 +222,7 @@ const Analytics = ({language}) => {
           {!selectedCountry ? (
             <>
               <ResponsiveContainer width="100%" height={400}>
-                <BarChart data={topCountries} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                <BarChart data={topCountries} margin={{ top: 20, right: 30, left: 20, bottom: 8 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#7eb77f" opacity={0.3} />
                   <XAxis
                     dataKey="location" 

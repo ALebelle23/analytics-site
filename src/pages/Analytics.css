@@ -28,6 +28,9 @@
   flex-direction: row;
   gap: 2rem;
   justify-content: space-between;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: visible;
 }
 
 .chart-section {
@@ -38,6 +41,9 @@
   border: 2px solid #7eb77f;
   flex: 1;
   min-height: 500px;
+  position: relative;
+  overflow: visible;
+  padding-bottom: 1rem;
 }
 
 .chart-section h2 {
@@ -45,6 +51,11 @@
   text-align: center;
   margin-bottom: 1.5rem;
   font-size: 1.8rem;
+}
+
+.chart-section select {
+  background-color: #034732;
+  color:#ec9a29;
 }
 
 .loading, .error {
@@ -122,4 +133,26 @@
 .back-button:hover{
   background-color: #034732;
   color: #ec9a29;
+}
+
+/* Fix for dropdowns opening upwards: ensure enough space below and no restrictive overflow */
+.chart-section {
+  /* ...existing code... */
+  position: relative;
+  overflow: visible;
+  padding-bottom: 2.5rem; /* Add extra space below dropdowns */
+}
+
+/* If dropdowns are inside a flex container, ensure flex-direction is column and align-items is stretch for charts-container */
+.charts-container {
+  /* ...existing code... */
+  flex-direction: column;
+  align-items: stretch;
+  overflow: visible;
+}
+
+/* Ensure select elements have enough z-index to appear above other elements */
+select {
+  /* ...existing code... */
+  z-index: 10;
 }

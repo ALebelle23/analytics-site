@@ -26,6 +26,8 @@ export const translations = {
     year_range_warning: "Please select a wider year range for meaningful visualization.",
     select_country: "Select a Country",
     back:"Back",
+    end_year: "End Year",
+    start_year: "Start Year",
   },
   fr: {
     welcome: "Bienvenue sur UFOlytics !",
@@ -53,5 +55,7 @@ export const translations = {
     year_range_warning: "Veuillez sélectionner une plage d'années plus large pour une visualisation significative.",
     select_country: "Sélectionner un pays",
     back: "Retour",
+    end_year: "Année de fin",
+    start_year: "Année de début",
   }
 };
