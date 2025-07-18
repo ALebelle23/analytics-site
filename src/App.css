@@ -17,7 +17,7 @@
 
 @media (max-width: 480px) {
   .main-content {
-    padding-top: 8rem; /* More space for mobile nav that might wrap to 2 lines */
+    padding-top: 8rem; 
     padding-left: 1rem;
     padding-right: 1rem;
   }

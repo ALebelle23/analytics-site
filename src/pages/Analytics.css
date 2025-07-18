@@ -103,3 +103,23 @@
 .data-source a:hover {
   color: #a8201a;
 }
+
+.legend-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+}
+
+.recharts-wrapper text {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.back-button {
+  background: #7eb77f;
+  color: #034732;
+}
+
+.back-button:hover{
+  background-color: #034732;
+  color: #ec9a29;
+}

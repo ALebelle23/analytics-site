@@ -32,7 +32,7 @@ export const processDataForCharts = (data) => {
   const sampleRow = data[0] || {};
   console.log('Available columns:', Object.keys(sampleRow));
   
-  // Graph 1: Sightings by Year - using the first column which appears to be datetime
+  // Graph 1: Sightings by Year
   const sightingsByYear = data.reduce((acc, row) => {
     const dateValue = row.datetime || Object.values(row)[0];
     if (dateValue) {
@@ -52,18 +52,32 @@ export const processDataForCharts = (data) => {
     .map(([year, count]) => ({ year: parseInt(year), sightings: count }))
     .sort((a, b) => a.year - b.year);
 
-  // Graph 2: Sightings by Country - using the country column
-  const sightingsByCountry = data.reduce((acc, row) => {
-    const country = row.country || Object.values(row)[3]; // country is 4th column (index 3)
-    if (country && country.trim() && country.toLowerCase() !== 'country') {
-      const countryName = country.trim().toUpperCase();
-      acc[countryName] = (acc[countryName] || 0) + 1;
+  // Graph 2: Sightings by Country and Cities
+  const sightingsByCountry = {};
+  const sightingsByCity = {};
+
+  data.forEach(row => {
+    const country = (row.country || Object.values(row)[3] || '').trim().toUpperCase();
+    const city = (row.city || Object.values(row)[1] || '').trim();
+    if (country && country !== 'COUNTRY') {
+      sightingsByCountry[country] = (sightingsByCountry[country] || 0) + 1;
+      if (!sightingsByCity[country]) sightingsByCity[country] = {};
+      if (city) {
+        sightingsByCity[country][city] = (sightingsByCity[country][city] || 0) + 1;
+      }
     }
-    return acc;
-  }, {});
+  });
 
   const countryData = Object.entries(sightingsByCountry)
-    .map(([country, count]) => ({ location: country, sightings: count }))
+    .map(([country, count]) => {
+      // Get top 5 cities for this country
+      const citiesObj = sightingsByCity[country] || {};
+      const citiesArr = Object.entries(citiesObj)
+        .map(([city, count]) => ({ city, sightings: count }))
+        .sort((a, b) => b.sightings - a.sightings)
+        .slice(0, 5);
+      return { location: country, sightings: count, cities: citiesArr };
+    })
     .sort((a, b) => b.sightings - a.sightings)
     .slice(0, 5); // Top 5 countries
 

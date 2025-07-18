@@ -3,24 +3,10 @@ import './Home.css'
 import { getOldestSighting, getNewestSighting, loadCSVData } from '../services/dataService'
 import { translations } from '../translation.js'
 
-function decodeHTMLEntities(text) {
-  const txt = document.createElement('textarea');
-  txt.innerHTML = text;
-  return txt.value;
-}
-function capitalizeWordWithPunctuation(str) {
-  return typeof str === 'string'
-    ? str.replace(/([a-zA-Z]+)(.*)/, (match, p1, p2) => {
-        const capitalized = p1.charAt(0).toUpperCase() + p1.slice(1).toLowerCase();
-        return capitalized + p2;
-      })
-    : str;
-}
+
 function cleanAndCapitalize(str) {
   if (typeof str !== 'string') return str;
-  // Remove parentheses and trim whitespace
   const cleaned = str.replace(/[()]/g, '').trim();
-  // Capitalize first letter, lowercase the rest
   return cleaned.charAt(0).toUpperCase() + cleaned.slice(1).toLowerCase();
 }
 function formatLocation(cityStr) {
@@ -59,8 +45,8 @@ const Home = ({language}) => {
             <h2>{t.oldest}</h2>
             <p><strong>Date:</strong> {oldest.datetime || oldest.date}</p>
             <p><strong>{t.location}:</strong> {formatLocation(oldest.city)}</p>
-            <p><strong>{t.shape}:</strong> {capitalizeWordWithPunctuation(oldest.shape)}</p>
-            <p><strong>Description:</strong> {decodeHTMLEntities(oldest.comments)}</p>
+            <p><strong>{t.shape}:</strong> {t.shape1}</p>
+            <p><strong>Description:</strong> {t.oldest_desc}</p>
           </div>
         )}
         {newest && (
@@ -68,8 +54,8 @@ const Home = ({language}) => {
             <h2>{t.newest}</h2>
             <p><strong>Date:</strong> {newest.datetime || newest.date}</p>
             <p><strong>{t.location}:</strong> {formatLocation(newest.city)}</p>
-            <p><strong>{t.shape}:</strong> {capitalizeWordWithPunctuation(newest.shape)}</p>
-            <p><strong>Description:</strong> {decodeHTMLEntities(newest.comments)}</p>
+            <p><strong>{t.shape}:</strong> {t.shape2}</p>
+            <p><strong>Description:</strong> {t.newest_desc}</p>
           </div>
         )}
       </div>
